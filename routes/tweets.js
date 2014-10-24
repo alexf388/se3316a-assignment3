@@ -3,16 +3,19 @@ var router = express.Router();
 
 /*
  * GET tweetlist.
- */
+ 
 router.get('/tweetlist', function(req, res) {
     var db = req.db;
     db.collection('tweetlist').find().toArray(function (err, items) {
         res.json(items);
     });
 });
+*/
+
+
 
 /*
- * POST to addtweet.
+ * POST to addtweet. POST will also check the database to see if there is already the same 
  */
 router.post('/addtweet', function(req, res) {
     var db = req.db;
@@ -23,6 +26,14 @@ router.post('/addtweet', function(req, res) {
     });
 });
 
+
+//NEW GET that also sorts the database by date (latest ten tweets will go first) before delivering it to the js  
+router.get('/tweetlist', function(req, res) {
+    var db = req.db;
+    db.collection('tweetlist').find().sort({$natural:-1}).limit(10).toArray(function (err, items) {
+	res.json(items);
+	});
+});
 
 
 

@@ -1,5 +1,7 @@
+/*
 // tweetslist data array for filling in info box
 var tweetListData = [];
+*/
 
 // DOM Ready =============================================================
 $(document).ready(function() {
@@ -46,14 +48,52 @@ function populateTable() {
 function addTweet(event) {
     event.preventDefault();
 
-    // Makes sure that there is actually input in the tweet box 
-    var errorCount = 0;
-    $('#addTweet input').each(function(index, val) {
-        if($(this).val() === '') { errorCount++; }
-    });
+    //boolean variables, one for noInput, and one for visible hashtag, and one if there are spaces 
+    var noInput = false;
+    var visibleHashtag = true;
+    var noSpaces = true; 
 
-    // Check and make sure errorCount's still at zero
-    if(errorCount === 0) {
+    
+    // Makes sure that there is actually input in the tweet box 
+    $('#addTweet input').each(function(index, val) {
+        if($(this).val() === '') { 
+		noInput = true; 
+		alert("Please fill in something in the hashtag input");  }
+    });	
+
+    if (noInput === true){
+	//do nothing, move on to the next if statement because the input is already invalid
+    }
+    else{
+    	// checks to see if the hashtag sign is in front, if not... 
+    	$('#addTweet input').each(function(index, val) {
+		var inputString = $(this).val().toString();         
+		//alert ("inputString[0]:" + inputString.charAt(0)); 
+	
+		if (inputString.charAt(0) != '#') { 
+			visibleHashtag = false; 
+			alert ("No hashtag in front! Please type '#' in front of tag" ); 
+		}
+    	});
+    }
+
+    if (noInput === true || visibleHashtag === false){
+	//do nothing, move on to the next if statement because the input is already invalid
+    }
+    else{
+	$('#addTweet input').each(function(index, val) {
+       		var inputString = $(this).val().toString();  
+
+		if (inputString.indexOf(' ') >= 0){
+			noSpaces = false; 
+			alert ("No spaces in between hashtags!" ); 			
+		}
+	}); 
+    }
+    
+
+    // Check and make sure all conditions have been fulfilled 
+    if(noInput === false && visibleHashtag === true && noSpaces ===true) {
 
 	//get the current date and time of the tweet
 	var d = new Date(); 
@@ -77,7 +117,7 @@ function addTweet(event) {
             // Check for successful (blank) response
             if (response.msg === '') {
 
-                // Clear the form inputs
+                // Clear the form inputs so the user doesn't have to backspace them everytime 
                 $('#addTweet fieldset input').val('');
 
                 // Update the table
@@ -92,9 +132,5 @@ function addTweet(event) {
             }
         });
     }
-    else {
-        // If errorCount is more than 0, error out
-        alert('Please fill in something!');
-        return false;
-    }
+    
 };
