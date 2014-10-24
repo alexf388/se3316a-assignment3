@@ -8,15 +8,23 @@ block content
     // Wrapper
     #wrapper
 
-        // USER LIST
+        // ADD TWEET
+        h2 Add Tweet
+        #addTweet
+            fieldset
+                input#inputTweetName(type='text', placeholder='#yolo #swag')
+                button#btnAddTweet Add Tweet
+        // /ADD TWEET
+
+
+        // TWEET LIST
         h2 Past tweets
-        #userList
+        #tweetList
             table
                 thead
                     th Tweet
                     th Date
-                    th Delete?
                 tbody
-        // /USER LIST
+        // /TWEET LIST
 
     // /WRAPPER
