@@ -1,0 +1,22 @@
+
+extends layout
+
+block content
+    h1 SE3316 Twitter 
+    p Brought to you by software eng students of Western
+
+    // Wrapper
+    #wrapper
+
+        // USER LIST
+        h2 Past tweets
+        #userList
+            table
+                thead
+                    th Tweet
+                    th Date
+                    th Delete?
+                tbody
+        // /USER LIST
+
+    // /WRAPPER
