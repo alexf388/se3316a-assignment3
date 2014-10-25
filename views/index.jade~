@@ -22,8 +22,9 @@ block content
         #tweetList
             table
                 thead
+                    th _id
                     th Tweet
-                    <!--th Date-->
+                    th Date
                 tbody
         // /TWEET LIST
 
