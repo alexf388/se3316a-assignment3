@@ -63,7 +63,7 @@ function addTweet(event) {
     $('#addTweet input').each(function(index, val) {
         if($(this).val() === '' || $(this).val() === '#') { 
 		noInput = true; 
-		alert("Please fill in something in the hashtag input (cannot be just hashtag as well)");  }
+		alert("Please fill in something in the hashtag input (input cannot be just hashtag as well)");  }
     });	
 
     if (noInput === true){
@@ -172,7 +172,7 @@ function deleteTweet(o_id){
 
         	$.ajax({
             		type: 'DELETE',
-            		url: '/tweets/deletetweet/' + o_id
+            		url: '/tweets/alltweets/' + o_id
         	}).done(function( response ) {
 
             		// Check for successful (blank) response
@@ -206,7 +206,7 @@ function AJAXAddTweet(){
         $.ajax({
             type: 'POST',
             data: newTweet,
-            url: '/tweets/addtweet',
+            url: '/tweets/alltweets',
             dataType: 'JSON'
         }).done(function( response ) {
 

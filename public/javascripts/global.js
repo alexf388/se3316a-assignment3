@@ -172,7 +172,7 @@ function deleteTweet(o_id){
 
         	$.ajax({
             		type: 'DELETE',
-            		url: '/tweets/deletetweet/' + o_id
+            		url: '/tweets/alltweets/' + o_id
         	}).done(function( response ) {
 
             		// Check for successful (blank) response
@@ -206,7 +206,7 @@ function AJAXAddTweet(){
         $.ajax({
             type: 'POST',
             data: newTweet,
-            url: '/tweets/addtweet',
+            url: '/tweets/alltweets',
             dataType: 'JSON'
         }).done(function( response ) {
 

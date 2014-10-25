@@ -13,9 +13,34 @@ router.get('/alltweets', function(req, res) {
 
 
 /*
+ * GET ONE TWEEET
+*/ 
+router.get('/alltweets/:id', function(req, res) {
+    var db = req.db;
+    var tweetToGet = req.params.id;
+    db.collection('tweetdb').findById(tweetToGet, function (err, item) {
+        res.json(item);
+    });
+});
+
+/*
+* UPDATE ONE TWEET (PUT) TO CHANGE THE NAME (ONLY), NOT THE DATE OR _ID
+*/
+router.put('/alltweets/:id', function(req, res){
+	var db = req.db; 
+	db.collection('tweetdb').updateById(req.params.id, {$set:req.body}, {safe: true, multi: false}, function(e, result){
+
+		if (e) return next (e); 
+		res.send((result===1)?{msg:'success'}:{msg:'error'})
+
+	}); 
+}); 
+
+
+/*
  * POST to addtweet.  
  */
-router.post('/addtweet', function(req, res) {
+router.post('/alltweets', function(req, res) {
     var db = req.db;
    
     db.collection('tweetdb').insert(req.body, function(err, result){
@@ -38,7 +63,7 @@ router.get('/tweetlist', function(req, res) {
 /*
  * DELETE to deletetweet
  */
-router.delete('/deletetweet/:id', function(req, res) { 
+router.delete('/alltweets/:id', function(req, res) { 
     var db = req.db;
     var userToDelete = req.params.id;
     db.collection('tweetdb').removeById(userToDelete, function(err, result) {

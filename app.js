@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // Database require including mongodb
+//var mongo = require ('mongoskin');
+// 
 var mongo = require('mongoskin');
 var db = mongo.db("mongodb://localhost:27017/nodetest3", {native_parser:true});
 
