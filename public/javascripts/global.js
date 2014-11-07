@@ -10,8 +10,9 @@ var dateJSON;
 $(document).ready(function() {
 
     // Populate the user table on initial page load
-    populateTable();
-
+    //populateTable();
+    var reset = setInterval(populateTable, 3000);	
+	
     // Add User button click, on click it will run function addTweet located below 
     $('#btnAddTweet').on('click', addTweet);
 
